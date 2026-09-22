@@ -1,4 +1,5 @@
 venv312
+.venv
 whisper_downloads
 __pycache__/
 *.pyc
