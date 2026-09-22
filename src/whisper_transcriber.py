@@ -15,38 +15,14 @@ logger.info("Importing ML tools..")
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor
 from number_parser import parse
 
-
-model_path_dev = "whisper_fine_tuning\whisper_medium_model_AawMaster"
-processor_path_dev = "whisper_fine_tuning\whisper_medium_processor_AawMaster"
+MODEL_PATH = "whisper_fine_tuning\whisper_medium_model_AawMaster"
+PROCESSOR_PATH = "whisper_fine_tuning\whisper_medium_processor_AawMaster"
 
 model_path_no_ft = "whisper_downloads\whisper_medium_model"
 processor_path_no_ft = "whisper_downloads\whisper_medium_processor"
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
-
-
-def get_correct_path(behind_path):
-    if getattr(sys, "frozen", False):
-        # For PyInstaller, files are in the same directory as the executable
-        # or in the _MEIPASS folder during execution
-        base_dir = (
-            os.path.dirname(sys.executable)
-            if hasattr(sys, "_MEIPASS")
-            else getattr(sys, "_MEIPASS", os.path.dirname(sys.executable))
-        )
-        full_path = os.path.join(base_dir, behind_path)
-
-        # Also check in the _MEIPASS temporary directory (for onefile mode)
-        if not os.path.exists(full_path) and hasattr(sys, "_MEIPASS"):
-            meipass_path = os.path.join(sys._MEIPASS, behind_path)
-            if os.path.exists(meipass_path):
-                return meipass_path
-
-        print("full_path from frozen: " + full_path)
-        return full_path
-    else:
-        return behind_path
 
 
 # Abstract out this method to not overcrowd the WhisperTranscriber class
@@ -62,8 +38,8 @@ def generate_samples_from_wav(wav_file_path):
 class WhisperTranscriber:
     # Constructor will instantiate the model and processor
     def __init__(self):
-        model_path = get_correct_path(model_path_dev)
-        processor_path = get_correct_path(processor_path_dev)
+        model_path = MODEL_PATH
+        processor_path = PROCESSOR_PATH
         logger.info("Loading VTT model. Standby...")
         self.model = AutoModelForSpeechSeq2Seq.from_pretrained(model_path)
         self.model.to(device)
