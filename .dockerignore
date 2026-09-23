@@ -1,0 +1,11 @@
+.venv
+__pycache__/
+*.pyc
+*.pyo
+.env
+.DS_Store
+build
+dist
+whisper_server_log.log
+whisper_fine_tuning
+whisper_downloads
