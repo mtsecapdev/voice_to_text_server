@@ -15,11 +15,11 @@ logger.info("Importing ML tools..")
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor
 from number_parser import parse
 
-MODEL_PATH = "whisper_fine_tuning\whisper_medium_model_AawMaster"
-PROCESSOR_PATH = "whisper_fine_tuning\whisper_medium_processor_AawMaster"
+MODEL_PATH = "whisper_fine_tuning/whisper_medium_model_AawMaster"
+PROCESSOR_PATH = "whisper_fine_tuning/whisper_medium_processor_AawMaster"
 
-model_path_no_ft = "whisper_downloads\whisper_medium_model"
-processor_path_no_ft = "whisper_downloads\whisper_medium_processor"
+model_path_no_ft = "whisper_downloads/whisper_medium_model"
+processor_path_no_ft = "whisper_downloads/whisper_medium_processor"
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
