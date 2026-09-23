@@ -79,24 +79,3 @@ class WhisperTranscriber:
         parsedNumbers = parse(transcription[0])
         logger.info("Transcription completed")
         return parsedNumbers
-
-
-if __name__ == "__main__":
-    transcriber = WhisperTranscriber()
-    # Testing transcriber on the problem wav files
-    problemWavFiles = [
-        "C:/Users/mtsec/UnityProjects/AawSmartTrainer/Voice Recordings/04092025/113704497-eos-error.wav",
-        "C:/Users/mtsec/UnityProjects/AawSmartTrainer/Voice Recordings/04092025/113720002-eos-error.wav",
-        "C:/Users/mtsec/UnityProjects/AawSmartTrainer/Voice Recordings/04092025/113728845-eos-error.wav",
-    ]
-
-    okWavFile = "C:/Users/mtsec/UnityProjects/AawSmartTrainer/Voice Recordings/04092025/113716432.wav"
-
-    print("Transcribing ok file..")
-    transcription = transcriber.transcribe_from_wav(okWavFile)
-    print(transcription)
-
-    for problemWavFile in problemWavFiles:
-        print("Trying to transcribe problem file..")
-        transcription = transcriber.transcribe_from_wav(problemWavFile)
-        print(transcription)
