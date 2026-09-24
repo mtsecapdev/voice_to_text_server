@@ -10,7 +10,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-logger.info("Starting Voice-To-Text Server v27012026")
+logger.info("Starting Voice-To-Text Server v2.0 24 Sep 2026")
 logger.info("Importing ML tools..")
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor
 from number_parser import parse
@@ -23,6 +23,11 @@ processor_path_no_ft = "whisper_downloads/whisper_medium_processor"
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
+
+if device == "cuda:0":
+    logger.info("GPU access available.")
+else:
+    logger.info("No GPU available - using CPU. Slower inference.")
 
 
 # Abstract out this method to not overcrowd the WhisperTranscriber class
