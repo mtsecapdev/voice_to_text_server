@@ -7,7 +7,7 @@ build:
 # Mount the path to the model and processor that is stored on disk.
 # Mount the path where the wav files live that is stored on disk.
 run:
-	docker run -p 50052:50052 --gpus device=0 \
+	docker run --rm -p 50052:50052 --gpus device=0 \
 		-v C:\Users\mtse\from-mtsecapdev-github\nwpt-vtt-models\whisper_fine_tuning:/app/whisper_fine_tuning \
 		-v C:\ProgramData\NwptRunData\VoiceRecordings:/app/voice_recordings \
 		$(IMAGE_NAME):$(TAG)
